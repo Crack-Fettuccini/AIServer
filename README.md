@@ -1,58 +1,67 @@
-# AIServer docker configuration for AI assisted research communcation
+# AIServer Docker Configuration for AI-Assisted Research Communication
+
+## File Structure
 ```bash
-    File Structure:
-        /AIServer
-	    ├──.env
-	    ├──/AICoreCoalesce
-	    ├──/AICoreConstruct
-	    │    └──/ollama
-	    │	        ├──docker-compose.yaml
-	    │    	└──/modelfile
-	    ├──/AICoreCrawl
-	    │    ├──/scraperr
-	    │    │    └──docker-compose.yaml
-	    │    └──/crawl4ai
-	    │         └──docker-compose.yaml
-	    ├──/AICoreSync
-	    │    ├──docker-compose.yaml
-	    │    └──/ntfy
-	    │         └──server.yaml
-	    ├──/AICoreFabric
-	    └──/AICoreOrchestrator
+/AIServer
+├── .env
+├── /AICoreCoalesce
+├── /AICoreConstruct
+│    └── /ollama
+│         ├── docker-compose.yaml
+│         └── /modelfile
+├── /AICoreCrawl
+│    ├── /scraperr
+│    │    └── docker-compose.yaml
+│    └── /crawl4ai
+│         └── docker-compose.yaml
+├── /AICoreSync
+│    ├── docker-compose.yaml
+│    └── /ntfy
+│         └── server.yaml
+├── /AICoreFabric
+└── /AICoreOrchestrator
 ```
 
-AICoreCoalesce:\
-        Purpose:\
-                Abstraction layer to summarise multiple model outputs for reliability.\
+## Core Components
 
-AICoreConstruct:\
-        Purpose:\
-                To query model endpoints for constructing results into a whole.\
-	Component-Status:\
-		Ollama: 	Completed
+### AICoreCoalesce
+	**Purpose:**
+		- Abstraction layer to summarize multiple model outputs for reliability.
 
-AICoreCrawl:\
-	Purpose:\
-		For webcrawling and scraping websites to form metadata for model to understand more easily.\
-	Component-Status:\
-		scraperr:	Completed and removed\
-		crawl4ai:	Partial (New docker compose update q1 2025)\
-		firecrawl:	Incomplete (Doesnt work)\
+### AICoreConstruct
+	**Purpose:**
+		- Queries model endpoints for constructing results into a whole.
 
-AICoreSync:\
-	Purpose:\
-		Notification channel to facilitate communication between AI and user for collecting user needs.\
-	Component-Status:\
-		ntfy:		Completed:\
+	**Component Status:**
+		- **Ollama:**		✅ Completed
 
-AICoreFabric:\
-	Purpose:\
-		Centralised Documentation of AI and Human actions and responses for auditing.\
-	Component-Status:\
-		Doc:		Incomplete\
+### AICoreCrawl
+	**Purpose:**
+		- Web crawling and scraping websites to generate metadata for improved model understanding.
 
-AICoreOrchestrator:\
-	Purpose:\
-		Organising overall model interaction with data into singular flow.\
-	Component-Status:\
-		n8n:		Incomplete\
+	**Component Status:**
+		- **scraperr:**		✅ Completed (Removed)
+		- **crawl4ai:**		🟡 Partial (New Docker Compose update Q1 2025)
+		- **firecrawl:**	❌ Incomplete (Doesn't work)
+
+### AICoreSync
+	**Purpose:**
+		- Notification channel to facilitate communication between AI and users for collecting user needs.
+
+	**Component Status:**
+		- **ntfy:** 		✅ Completed
+
+### AICoreFabric
+	**Purpose:**
+		- Centralized documentation of AI and human actions and responses for auditing.
+
+	**Component Status:**
+		- **Doc:** 		❌ Incomplete
+
+### AICoreOrchestrator
+	**Purpose:**
+		- Organizes overall model interaction with data into a singular flow.
+
+	**Component Status:**
+		- **n8n:** 		❌ Incomplete
+

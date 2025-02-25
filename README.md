@@ -23,58 +23,80 @@
 ```
 
 ## System Workflow
-	1. **AICoreFabric** records user problems or mission statements, acting as the central repository for AI and user interactions.
-	2. **AICoreConstruct** queries various AI model endpoints to generate relevant responses based on the problem definition.
-	3. **AICoreCoalesce** processes the multiple model outputs, analyzing and synthesizing them into a reliable and actionable result.
-	4. **AICoreSync** manages communication with the user, sending notifications and collecting additional input when required.
-	5. User responses and additional context are updated in **AICoreFabric**, ensuring an evolving and dynamic research process.
-	6. **AICoreOrchestrator** oversees the entire workflow, ensuring data flows efficiently between components.
+1. **AICoreFabric**
+	- Records user-defined problems or mission statements.
+	- Acts as a centralized repository for documenting all AI and user interactions.
+	- Implements security and audit logging to maintain a complete record of actions and decisions.
+2. **AICoreConstruct**
+	- Queries various AI model endpoints (acting as specialized agents) to generate insights and potential solutions based on the problem definition.
+3. **AICoreCoalesce**
+	- Aggregates, analyzes, and synthesizes multiple model outputs.
+	- Ensures that the final response is reliable, consistent, and actionable.
+	- Plans further code execution or additional analyses based on the synthesized results.
+4. **AICoreSync**
+	- Manages real-time communication with the user by sending notifications and collecting clarifications or additional input.
+	- Updates user responses back into AICoreFabric, ensuring the research process evolves dynamically.
+5. **AICoreCrawl**
+	- Gathers external data by web crawling and scraping to enhance AI-generated insights.
+	- Provides critical metadata to improve the overall understanding of context by the AI agents.
+6. **AICoreOrchestrator**
+	- Oversees and manages the flow of data and tasks between all components.
+	- Ensures a structured, automated, and adaptive approach to problem-solving.
 
-## Core Components
+## Core Components & Use Cases
+
 ### AICoreFabric
-	**Purpose:**
-		- Centralized repository for user-defined problems, AI-generated responses, and interactions.
-		- Tracks progress and refines AI outputs based on evolving needs.
-
-	**Component Status:**
-		- **Doc:** 		❌ Incomplete
+	- **Purpose:**
+		- Acts as the central documentation hub by recording all user problems, AI-generated responses, and subsequent actions.
+		- Tracks progress and refines AI outputs over time.
+		- Integrates built-in security and audit logging to monitor system integrity.
+	- **Component Status:**
+		- **PostgreSQL or SQLite**	❌ Incomplete (Database & storage for robust, local data storage)
+		- **Graylog or OpenSearch** 	❌ Incomplete (Audit logging for log aggregation and search)
+		- **Keycloak** 			❌ Incomplete (Security & access control for managing user roles and securing endpoints)
+		- **Data Version Control**	❌ Incomplete (Versioning & data tracking for tracking model and dataset changes)
 
 ### AICoreConstruct
-	**Purpose:**
-		- Queries multiple AI models to generate insights, responses, and potential solutions based on user queries.
-
-	**Component Status:**
-		- **Ollama:** 		✅ Completed
+	- **Purpose:**
+		- Serves as the query interface to multiple AI models, acting as specialized agents.
+		- Aggregates diverse insights and potential solutions based on user inputs.
+	- **Component Status:**
+		- **Ollama:**			✅ Completed
+		- **Flask**			❌ Incomplete (API & Microservice Framework for standardized communication)
+		- **Transformers** 		❌ Incomplete (for hosting models on-premise)
+		- **Celery+Redis or RabbitMQ** 	❌ Incomplete (Task scheduling & management for asynchronous processing)
 
 ### AICoreCoalesce
-	**Purpose:**
-		- Aggregates, analyzes, and synthesizes multiple AI model outputs.
-		- Ensures reliability, consistency, and coherence in the final response.
-		- Plans code execution or additional analyses based on AI findings.
+	- **Purpose:**
+		- Aggregates and synthesizes responses from the various AI agents.
+		- Analyzes outputs for reliability and consistency.
+		- Acts as the operator, planning next steps such as code execution or further analyses.
+	- **Component Status**:
+		- **Pandas and NumPy**		❌ Incomplete (Data Aggregation, analysis, processing and analyzing model outputs)
+		- **scikit-learn**		❌ Incomplete (Consensus & ranking algorithms such as ensemble voting and response ranking)
+		- **R1?**			❌ Incomplete (As a Workflow Decision Engine)
 
 ### AICoreSync
-	**Purpose:**
-		- Manages interactions between AI and the user.
-		- Sends notifications and requests clarifications or additional input from the user.
-		- Updates user responses back into **AICoreFabric** to refine the research process.
-
-	**Component Status:**
-		- **ntfy:** 		✅ Completed
+	- **Purpose:**
+		- Manages real-time interaction between the AI and the user.
+		- Sends notifications and requests for additional input, ensuring continuous feedback.
+		- Updates AICoreFabric with new information to keep the research process dynamic.
+	- **Component Status:**
+		- **ntfy:** 			✅ Completed
 
 ### AICoreCrawl
-	**Purpose:**
-		- Gathers external data via web crawling and scraping to enhance AI-generated insights.
-		- Provides metadata that improves AI understanding of the context.
-
-	**Component Status:**
-		- **scraperr:** 	✅ Completed (Removed)
-		- **crawl4ai:** 	🟡 Partial (New Docker Compose update Q1 2025)
-		- **firecrawl:** 	❌ Incomplete (Doesn't work)
+	- **Purpose:**
+		- Provides the AI research assistant with access to live internet data.
+		- Uses web crawling and scraping to fetch metadata and context that enhance model responses.
+	- **Component Status:**
+		- **scraperr:**			✅ Completed (Removed)
+		- **crawl4ai:**			🟡 Partial (New Docker Compose update Q1 2025)
+		- **firecrawl:**		❌ Incomplete (Doesn't work)
 
 ### AICoreOrchestrator
-	**Purpose:**
-		- Oversees and manages the flow of data between components.
-		- Ensures a structured and automated approach to problem-solving.
-
-	**Component Status:**
-		- **n8n:** 		❌ Incomplete
+	- **Purpose:**
+		- Coordinates the entire workflow by ensuring data flows efficiently between components.
+		- Oversees task scheduling and dynamic adaptation of workflows based on aggregated outputs.
+	- **Component Status:**
+		- **n8n:**			❌ Incomplete
+		- **Apache Airflow** 		❌ Incomplete (Task scheduling for complex orchestration)

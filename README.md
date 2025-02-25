@@ -16,8 +16,11 @@ AIServer:
 	    |    ├/ntfy
 	    |         ├server.yaml
 	    ├/AICoreFabric
-AICoreCoalesce
-AICoreConstruct
+
+AICoreCoalesce:
+
+AICoreConstruct:
+
 AICoreCrawl:
 	
 	Purpose:
@@ -27,11 +30,13 @@ AICoreCrawl:
 		Partial:	crawl4ai(New docker compose update q1 2025)
 		Incomplete:	firecrawl(Doesnt work)
 AICoreSync:
+
 	Purpose:
 		Notification channel to facilitate communication between AI and user for collecting user needs.
 	status:
 		Completed:	ntfy
 AICoreFabric:
+
 	Purpose:
 		Centralised Documentation of AI and Human actions and responses for auditing.
 	status:

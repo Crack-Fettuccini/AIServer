@@ -1,0 +1,29 @@
+version: '3.8'
+
+name: crawl4ai-docker
+services:
+  crawl4ai:
+    image: unclecode/crawl4ai:basic-amd64
+    container_name: crawl4ai-docker
+    ports:
+      - "${CRAWL4AI_PORT}:11235"
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "AICoreCrawl"
+      tsdproxy.funnel: "true"
+    env_file:
+      - .env
+    environment:
+      - CRAWL4AI_API_TOKEN=${CRAWL4AI_API_TOKEN:-}  # Optional API security
+      - MAX_CONCURRENT_TASKS=5
+      # LLM Provider Keys
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    volumes:
+      - /dev/shm:/dev/shm
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 250M

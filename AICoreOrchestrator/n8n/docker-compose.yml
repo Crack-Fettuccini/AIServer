@@ -1,0 +1,25 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - ${N8N_PORT}:1102
+    environment:
+      - N8N_HOST=${HOST_URL}
+      - N8N_PORT=${N8N_PORT}
+      - WEBHOOK_URL=https://${HOOK_URL}
+      - N8N_RUNNERS_ENABLED=true
+    labels:
+      tsdproxy.enable: "true"
+      tsdproxy.name: "n8n"
+      tsdproxy.funnel: "true"
+    volumes:
+      - ${PWD}/n8n_data:/home/node/.n8n
+    networks:
+      - TSDNet
+networks:
+  TSDNet:
+    external: true
